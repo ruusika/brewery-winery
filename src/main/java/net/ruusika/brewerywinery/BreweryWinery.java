@@ -2,6 +2,7 @@ package net.ruusika.brewerywinery;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.ruusika.brewerywinery.init.BreweryWineryBlockEntities;
 import net.ruusika.brewerywinery.init.BreweryWineryBlocks;
 import net.ruusika.brewerywinery.init.BreweryWineryItems;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ public class BreweryWinery implements ModInitializer {
 	public void onInitialize() {
 		BreweryWineryItems.initialize();
 		BreweryWineryBlocks.initialize();
+		BreweryWineryBlockEntities.initialize();
 		LOGGER.info("DINONUGGETS!");
 	}
 }
