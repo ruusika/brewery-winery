@@ -9,11 +9,14 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.ruusika.brewerywinery.init.BreweryWineryBlockEntities;
+import net.ruusika.brewerywinery.util.BreweryWineryTags;
 import net.ruusika.brewerywinery.util.NbtKeys;
 
 public class KegBlockEntity extends BlockEntity {
 
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4 , ItemStack.EMPTY);
+    public static final int MAX_PROGRESS = 100;
+
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
     private int progressTick;
     private int tick;
 
@@ -25,7 +28,13 @@ public class KegBlockEntity extends BlockEntity {
 
     @SuppressWarnings("unused")
     public static void tick(World world, BlockPos blockPos, BlockState blockState, KegBlockEntity blockEntity) {
-        blockEntity.tick ++;
+        blockEntity.tick++;
+        BlockState stateBelow = world.getBlockState(blockPos.down());
+        if (stateBelow.isIn(BreweryWineryTags.Blocks.HEAT_BLOCKS)) {
+            blockEntity.progressTick = Math.min(MAX_PROGRESS, blockEntity.progressTick + 1);
+        } else {
+            blockEntity.progressTick = Math.max(0, blockEntity.progressTick - 1);
+        }
     }
 
     @Override

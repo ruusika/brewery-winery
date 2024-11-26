@@ -7,6 +7,7 @@ import net.minecraft.util.registry.Registry;
 import net.ruusika.brewerywinery.BreweryWinery;
 import net.ruusika.brewerywinery.items.BeverageItem;
 
+@SuppressWarnings("unused")
 public class BreweryWineryItems {
     public static final Item LAGER_BEER = register("beer_lager", new BeverageItem());
     public static final Item HONEY_BEER = register("beer_honey", new BeverageItem());
@@ -18,6 +19,11 @@ public class BreweryWineryItems {
 
     public static final Item MEAD = register("mead", new BeverageItem(new FabricItemSettings().maxCount(16),20));
     public static final Item CIDER = register("cider", new BeverageItem());
+
+    public static final Item HOPS = register("hops", new Item(new FabricItemSettings()));
+    public static final Item YEAST = register("yeast", new Item(new FabricItemSettings()));
+
+    public static final Item SERVING_TRAY = register("serving_tray", new Item(new FabricItemSettings()));
 
     private static Item register(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(BreweryWinery.MOD_ID, name), item);
