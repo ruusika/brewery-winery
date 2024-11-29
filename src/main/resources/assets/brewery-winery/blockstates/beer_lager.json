@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "brewery-winery:block/beer_lager_block" }
+  }
+}

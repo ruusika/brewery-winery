@@ -1,6 +1,5 @@
 package net.ruusika.brewerywinery.items;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -15,15 +14,11 @@ import net.minecraft.world.World;
 
 public class BeverageItem extends Item {
 
-    private final int duration;
+    private final int maxUseTime;
 
-    public BeverageItem(Settings settings, int duration) {
+    public BeverageItem(Settings settings, int maxUseTime) {
         super(settings);
-        this.duration = duration;
-    }
-
-    public BeverageItem() {
-        this(new FabricItemSettings(),40);
+        this.maxUseTime = maxUseTime;
     }
 
     @Override
@@ -33,7 +28,7 @@ public class BeverageItem extends Item {
 
     @Override
     public int getMaxUseTime(ItemStack stack) {
-        return duration;
+        return maxUseTime;
     }
 
     @Override

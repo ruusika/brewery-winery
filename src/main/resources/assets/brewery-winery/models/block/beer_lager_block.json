@@ -1,0 +1,6 @@
+{
+  "parent": "brewery-winery:block/mug_small_block",
+  "textures": {
+    "0": "brewery-winery:block/mug_block_light"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "brewery-winery:block/beer_weird_block" }
+  }
+}
