@@ -1,8 +1,9 @@
 package net.ruusika.brewerywinery.items;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.sound.SoundEvent;
@@ -12,12 +13,12 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
-public class BeverageItem extends Item {
+public class BeverageItem extends BlockItem {
 
     private final int maxUseTime;
 
-    public BeverageItem(Settings settings, int maxUseTime) {
-        super(settings);
+    public BeverageItem(Block block, Settings settings, int maxUseTime) {
+        super(block, settings);
         this.maxUseTime = maxUseTime;
     }
 

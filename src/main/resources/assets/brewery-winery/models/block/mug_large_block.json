@@ -3,7 +3,6 @@
 	"parent": "block/block",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "brewery-winery:block/mug_large_block",
 		"particle": "minecraft:block/glass"
 	},
 	"elements": [

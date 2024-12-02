@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "brewery-winery:block/serving_tray_block"
+    }
+  }
+}

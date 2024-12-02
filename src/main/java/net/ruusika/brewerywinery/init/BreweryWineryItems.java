@@ -11,30 +11,49 @@ import net.ruusika.brewerywinery.items.ServingTrayItem;
 @SuppressWarnings("unused")
 public class BreweryWineryItems {
     public static final Item LAGER_BEER = register("beer_lager", new BeverageItem(
-            new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY), 40));
+            BreweryWineryBlocks.LAGER_BEER, new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY),
+            40));
+
     public static final Item CRAFT_BEER = register("beer_craft", new BeverageItem(
-            new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY), 40));
+            BreweryWineryBlocks.CRAFT_BEER, new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY),
+            40));
+
     public static final Item WEIRD_BEER = register("beer_weird", new BeverageItem(
-            new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY), 40));
+            BreweryWineryBlocks.WEIRD_BEER, new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY),
+            40));
 
     public static final Item LAGER_BEER_LARGE = register("beer_lager_large", new BeverageItem(
-            new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY), 40));
-    public static final Item CRAFT_BEER_LARGE = register("beer_craft_large", new BeverageItem(
-            new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY), 40));
-    public static final Item WEIRD_BEER_LARGE = register("beer_weird_large", new BeverageItem(
-            new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY), 40));
+            BreweryWineryBlocks.LAGER_BEER_LARGE, new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY),
+            40));
 
+    public static final Item CRAFT_BEER_LARGE = register("beer_craft_large", new BeverageItem(
+            BreweryWineryBlocks.CRAFT_BEER_LARGE, new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY),
+            40));
+
+    public static final Item WEIRD_BEER_LARGE = register("beer_weird_large", new BeverageItem(
+            BreweryWineryBlocks.WEIRD_BEER_LARGE, new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY),
+            40));
+/*
     public static final Item RED_WINE = register("wine_red", new BeverageItem(
-            new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY), 40));
+            BreweryWineryBlocks.RED_WINE, new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY),
+            40));
+
     public static final Item WHITE_WINE = register("wine_white", new BeverageItem(
-            new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY), 40));
+            BreweryWineryBlocks.WHITE_WINE, new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY),
+            40));
+
     public static final Item ROSE_WINE = register("wine_rose", new BeverageItem(
-            new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY), 40));
+            BreweryWineryBlocks.ROSE_WINE, new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY),
+            40));
 
     public static final Item MEAD = register("mead", new BeverageItem(
-            new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY), 40));
+            BreweryWineryBlocks.MEAD, new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY),
+            40));
+
     public static final Item CIDER = register("cider", new BeverageItem(
-            new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY), 40));
+            BreweryWineryBlocks.CIDER, new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY),
+            40));
+    */
 
     public static final Item HOPS = register("hops", new Item(
             new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY)));
