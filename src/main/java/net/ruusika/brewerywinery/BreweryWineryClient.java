@@ -16,5 +16,12 @@ public class BreweryWineryClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(BreweryWineryBlocks.LAGER_BEER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BreweryWineryBlocks.CRAFT_BEER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BreweryWineryBlocks.WEIRD_BEER, RenderLayer.getCutout());
+
+        BlockRenderLayerMap.INSTANCE.putBlock(BreweryWineryBlocks.RED_WINE, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BreweryWineryBlocks.WHITE_WINE, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BreweryWineryBlocks.ROSE_WINE, RenderLayer.getCutout());
+
+        BlockRenderLayerMap.INSTANCE.putBlock(BreweryWineryBlocks.CIDER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BreweryWineryBlocks.MEAD, RenderLayer.getCutout());
     }
 }

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "brewery-winery:block/beer_weird_block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "brewery-winery:block/beer_weird_block"
+    },
+    "facing=south": {
+      "model": "brewery-winery:block/beer_weird_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "brewery-winery:block/beer_weird_block",
+      "y": 270
+    }
+  }
+}
