@@ -100,12 +100,12 @@ public class ServingTrayBlock extends BlockWithEntity implements Waterloggable {
 
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        super.onStateReplaced(state, world, pos, newState, moved);
         if (!(world.getBlockEntity(pos) instanceof ServingTrayBlockEntity servingTrayBlockEntity)) {
             return;
         }
         if (!state.getBlock().equals(newState.getBlock())) {
             ItemScatterer.spawn(world, pos, servingTrayBlockEntity.getInventory());
         }
+        super.onStateReplaced(state, world, pos, newState, moved);
     }
 }
