@@ -1,3 +1,7 @@
 {
-  "parent": "brewery-winery:block/beer_weird"
+  "parent": "brewery-winery:block/mug_small_block",
+  "textures": {
+    "0": "brewery-winery:block/mug_small_dark",
+    "particle": "minecraft:block/glass"
+  }
 }

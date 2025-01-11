@@ -6,7 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.util.Identifier;
 import net.ruusika.brewerywinery.BreweryWinery;
+import net.ruusika.brewerywinery.blocks.BeverageBlock;
 import net.ruusika.brewerywinery.blocks.KegBlock;
+import net.ruusika.brewerywinery.datagen.util.BeerModelSupplier;
 import net.ruusika.brewerywinery.init.BreweryWineryBlocks;
 
 public class BreweryWineryModelProvider extends FabricModelProvider {
@@ -40,6 +42,17 @@ public class BreweryWineryModelProvider extends FabricModelProvider {
                 .coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates())
                 .coordinate(createIsFinishedMap()));
 
+        for (BeverageBlock entry : BreweryWineryBlocks.BEERS) {
+            String parentPath = "block/mug_" + entry.getSize().getName() + "_block";
+            String texturePath = "block/mug_" + entry.getSize().getName() + "_" + entry.getColor().getName();
+            blockStateModelGenerator.excludeFromSimpleItemModelGeneration(entry);
+            blockStateModelGenerator.modelCollector.accept(ModelIds.getItemModelId(entry.asItem()),
+                    new BeerModelSupplier(
+                            new Identifier(BreweryWinery.MOD_ID, parentPath),
+                            new Identifier(BreweryWinery.MOD_ID, texturePath),
+                            new Identifier("block/glass")
+                    ));
+        }
     }
 
     @Override

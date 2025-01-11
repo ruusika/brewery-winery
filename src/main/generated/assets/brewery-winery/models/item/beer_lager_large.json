@@ -1,3 +1,7 @@
 {
-  "parent": "brewery-winery:block/beer_lager_large"
+  "parent": "brewery-winery:block/mug_large_block",
+  "textures": {
+    "0": "brewery-winery:block/mug_large_light",
+    "particle": "minecraft:block/glass"
+  }
 }
