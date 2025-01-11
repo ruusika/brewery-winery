@@ -7,6 +7,8 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
 import net.ruusika.brewerywinery.blocks.entities.ServingTrayBlockEntity;
 
@@ -33,24 +35,34 @@ public class ServingTrayBlockEntityRenderer<T extends ServingTrayBlockEntity> im
 
             ItemStack stack = entity.getInventory().get(i);
             int seed = (int) (entity.getPos().asLong() + i);
-            double offset = 0.195;
-            double center = 0.5;
 
             double x;
             double z;
 
+            Vec3d normalizeRandomPosition = Optional.ofNullable(entity.getStackPosition(i)).orElse(Vec3d.ZERO);
+            double minRandomPosition = -0.04;
+            double maxRandomPosition = -0.015;
+            Vec3d randomPosition = new Vec3d(
+                    MathHelper.lerp(normalizeRandomPosition.x, minRandomPosition, maxRandomPosition),
+                    normalizeRandomPosition.y,
+                    MathHelper.lerp(normalizeRandomPosition.x, minRandomPosition, maxRandomPosition)
+            );
+
+            double offset = 0.195;
+            double center = 0.5;
+
             if (i == 0) {
-                x = center + offset;
-                z = center + offset;
+                x = center + offset + randomPosition.x;
+                z = center + offset + randomPosition.z;
             } else if (i == 1) {
-                x = center - offset;
-                z = center + offset;
+                x = center - (offset + randomPosition.x);
+                z = center + offset + randomPosition.z;
             } else if (i == 2) {
-                x = center + offset;
-                z = center - offset;
+                x = center + offset + randomPosition.x;
+                z = center - (offset + randomPosition.z);
             } else {
-                x = center - offset;
-                z = center - offset;
+                x = center - (offset + randomPosition.x);
+                z = center - (offset + randomPosition.z);
             }
 
             if (!stack.isEmpty()) {

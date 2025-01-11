@@ -11,6 +11,7 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.ruusika.brewerywinery.init.BreweryWineryBlockEntities;
 import net.ruusika.brewerywinery.util.NbtKeys;
 import org.jetbrains.annotations.Nullable;
@@ -21,6 +22,7 @@ public class ServingTrayBlockEntity extends BlockEntity {
 
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
     private final HashMap<Integer, Float> stackRotation = new HashMap<>();
+    private final HashMap<Integer, Vec3d> stackPosition = new HashMap<>();
 
     public ServingTrayBlockEntity( BlockPos pos, BlockState state) {
         super(BreweryWineryBlockEntities.SERVING_TRAY, pos, state);
@@ -33,6 +35,11 @@ public class ServingTrayBlockEntity extends BlockEntity {
     @Nullable
     public Float getStackRotation(int index) {
         return stackRotation.get(index);
+    }
+
+    @Nullable
+    public Vec3d getStackPosition(int index) {
+        return stackPosition.get(index);
     }
 
     @SuppressWarnings("unused")
@@ -55,6 +62,7 @@ public class ServingTrayBlockEntity extends BlockEntity {
                 inventory.set(i, stack.copy());
                 if (world != null){
                     stackRotation.put(i, world.getRandom().nextFloat()*360);
+                    stackPosition.put(i, new Vec3d(world.getRandom().nextDouble(), 0 , world.getRandom().nextDouble()));
                 }
                 changed = true;
                 break;
@@ -78,6 +86,7 @@ public class ServingTrayBlockEntity extends BlockEntity {
             if (!entry.isEmpty()) {
                 removedStack = entry.copy();
                 stackRotation.remove(i);
+                stackPosition.remove(i);
                 inventory.set(i, ItemStack.EMPTY);
                 break;
             }
@@ -107,9 +116,17 @@ public class ServingTrayBlockEntity extends BlockEntity {
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
+
         NbtCompound stackRotationsNbt = nbt.getCompound(NbtKeys.ROTATION);
         for (String nbtKey : stackRotationsNbt.getKeys()) {
             stackRotation.put(Integer.valueOf(nbtKey),stackRotationsNbt.getFloat(nbtKey));
+        }
+
+        NbtCompound stackPositionsNbt = nbt.getCompound(NbtKeys.POSITION);
+        for (String nbtKey : stackPositionsNbt.getKeys()) {
+            NbtCompound coordinatesNbt = stackPositionsNbt.getCompound(nbtKey);
+            Vec3d coordinate = new Vec3d(coordinatesNbt.getDouble("x"), 0 , coordinatesNbt.getDouble("z"));
+            stackPosition.put(Integer.valueOf(nbtKey), coordinate);
         }
     }
 
@@ -117,8 +134,18 @@ public class ServingTrayBlockEntity extends BlockEntity {
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
+
         NbtCompound stackRotationsNbt = new NbtCompound();
         stackRotation.forEach((key, value) -> stackRotationsNbt.putFloat(String.valueOf(key), value));
         nbt.put(NbtKeys.ROTATION, stackRotationsNbt);
+
+        NbtCompound stackPositionsNbt = new NbtCompound();
+        stackPosition.forEach((key, value) -> {
+            NbtCompound coordinatesNbt = new NbtCompound();
+            coordinatesNbt.putDouble("x", value.getX());
+            coordinatesNbt.putDouble("z", value.getZ());
+            stackPositionsNbt.put(String.valueOf(key), coordinatesNbt);
+        });
+        nbt.put(NbtKeys.POSITION, stackPositionsNbt);
     }
 }
