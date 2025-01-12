@@ -1,3 +1,7 @@
 {
-  "parent": "brewery-winery:block/serving_tray"
+  "parent": "brewery-winery:block/serving_tray_block",
+  "textures": {
+    "0": "brewery-winery:block/serving_tray_block",
+    "particle": "minecraft:block/stripped_spruce_log"
+  }
 }

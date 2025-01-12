@@ -7,7 +7,6 @@ import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.registry.Registry;
 import net.ruusika.brewerywinery.BreweryWinery;
 import net.ruusika.brewerywinery.blocks.BeverageBlock;
@@ -32,58 +31,47 @@ public class BreweryWineryBlocks {
 
     public static final BeverageBlock CRAFT_BEER = registerBeer("beer_craft",
             new BeverageBlock(AbstractBlock.Settings.of(Material.GLASS, MapColor.BROWN).breakInstantly(),
-                    new Vec3i(4, 0, 4), new Vec3i(12, 8, 12), BeverageBlock.Size.SMALL,
-                    BeverageBlock.Color.RED), false);
+                    BeverageBlock.Shape.SMALL, BeverageBlock.Color.RED), false);
 
     public static final BeverageBlock CRAFT_BEER_LARGE = registerBeer("beer_craft_large",
             new BeverageBlock(AbstractBlock.Settings.of(Material.GLASS, MapColor.BROWN).breakInstantly(),
-                    new Vec3i(4, 0, 4), new Vec3i(12, 13, 12), BeverageBlock.Size.LARGE,
-                    BeverageBlock.Color.RED), false);
+                    BeverageBlock.Shape.LARGE, BeverageBlock.Color.RED), false);
 
     public static final BeverageBlock LAGER_BEER = registerBeer("beer_lager",
             new BeverageBlock(AbstractBlock.Settings.of(Material.GLASS, MapColor.BROWN).breakInstantly(),
-                    new Vec3i(4, 0, 4), new Vec3i(12, 8, 12), BeverageBlock.Size.SMALL,
-                    BeverageBlock.Color.LIGHT), false);
+                    BeverageBlock.Shape.SMALL, BeverageBlock.Color.LIGHT), false);
 
     public static final BeverageBlock LAGER_BEER_LARGE = registerBeer("beer_lager_large",
             new BeverageBlock(AbstractBlock.Settings.of(Material.GLASS, MapColor.BROWN).breakInstantly(),
-                    new Vec3i(4, 0, 4), new Vec3i(12, 13, 12), BeverageBlock.Size.LARGE,
-                    BeverageBlock.Color.LIGHT), false);
+                    BeverageBlock.Shape.LARGE, BeverageBlock.Color.LIGHT), false);
 
     public static final BeverageBlock WEIRD_BEER = registerBeer("beer_weird",
             new BeverageBlock(AbstractBlock.Settings.of(Material.GLASS, MapColor.BROWN).breakInstantly(),
-                    new Vec3i(4, 0, 4), new Vec3i(12, 8, 12), BeverageBlock.Size.SMALL,
-                    BeverageBlock.Color.DARK), false);
+                    BeverageBlock.Shape.SMALL, BeverageBlock.Color.DARK), false);
 
     public static final BeverageBlock WEIRD_BEER_LARGE = registerBeer("beer_weird_large",
             new BeverageBlock(AbstractBlock.Settings.of(Material.GLASS, MapColor.BROWN).breakInstantly(),
-                    new Vec3i(4, 0, 4), new Vec3i(12, 13, 12), BeverageBlock.Size.LARGE,
-                    BeverageBlock.Color.DARK), false);
+                    BeverageBlock.Shape.LARGE, BeverageBlock.Color.DARK), false);
 
     public static final BeverageBlock RED_WINE = register("wine_red",
             new BeverageBlock(AbstractBlock.Settings.of(Material.GLASS, MapColor.BROWN).breakInstantly(),
-            new Vec3i(4,0,4), new Vec3i(12,13,12), BeverageBlock.Size.SMALL,
-                    BeverageBlock.Color.DARK_RED), false);
+                    BeverageBlock.Shape.SMALL, BeverageBlock.Color.DARK_RED), false);
 
     public static final BeverageBlock ROSE_WINE = register("wine_rose",
             new BeverageBlock(AbstractBlock.Settings.of(Material.GLASS, MapColor.BROWN).breakInstantly(),
-            new Vec3i(4,0,4), new Vec3i(12,13,12), BeverageBlock.Size.SMALL,
-                    BeverageBlock.Color.ROSE), false);
+                    BeverageBlock.Shape.SMALL, BeverageBlock.Color.ROSE), false);
 
     public static final BeverageBlock WHITE_WINE = register("wine_white",
             new BeverageBlock(AbstractBlock.Settings.of(Material.GLASS, MapColor.BROWN).breakInstantly(),
-            new Vec3i(4,0,4), new Vec3i(12,13,12), BeverageBlock.Size.SMALL,
-                    BeverageBlock.Color.WHITE), false);
+                    BeverageBlock.Shape.SMALL, BeverageBlock.Color.WHITE), false);
 
     public static final BeverageBlock CIDER = register("cider",
             new BeverageBlock(AbstractBlock.Settings.of(Material.GLASS, MapColor.BROWN).breakInstantly(),
-            new Vec3i(4,0,4), new Vec3i(12,13,12), BeverageBlock.Size.SMALL,
-                    BeverageBlock.Color.HONEY), false);
+                    BeverageBlock.Shape.SMALL, BeverageBlock.Color.HONEY), false);
 
     public static final BeverageBlock MEAD = register("mead",
             new BeverageBlock(AbstractBlock.Settings.of(Material.GLASS, MapColor.BROWN).breakInstantly(),
-            new Vec3i(4,0,4), new Vec3i(12,13,12), BeverageBlock.Size.SMALL,
-                    BeverageBlock.Color.HONEY), false);
+                    BeverageBlock.Shape.SMALL, BeverageBlock.Color.HONEY), false);
 
     private static <T extends Block> T register(String name, T block, boolean hasDefaultItem) {
         Identifier id = new Identifier(BreweryWinery.MOD_ID, name);
@@ -94,8 +82,8 @@ public class BreweryWineryBlocks {
         return Registry.register(Registry.BLOCK, id, block);
     }
 
-    private static <T extends Block> T registerBeer(String name, T block, boolean hasDefaultItem){
-        if (block instanceof BeverageBlock beverageBlock){
+    private static <T extends Block> T registerBeer(String name, T block, boolean hasDefaultItem) {
+        if (block instanceof BeverageBlock beverageBlock) {
             BEERS.add(beverageBlock);
         }
         return register(name, block, hasDefaultItem);

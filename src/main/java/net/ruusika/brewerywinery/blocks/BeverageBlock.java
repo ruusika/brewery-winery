@@ -15,23 +15,19 @@ import org.jetbrains.annotations.Nullable;
 
 public class BeverageBlock extends HorizontalFacingBlock {
 
-    private final Vec3i min;
-    private final Vec3i max;
-    private final Size size;
+    private final Shape shape;
     private final Color color;
 
-    public BeverageBlock(Settings settings, Vec3i min, Vec3i max, Size size, Color color) {
+    public BeverageBlock(Settings settings, Shape shape, Color color) {
         super(settings);
-        this.min = min;
-        this.max = max;
-        this.size = size;
+        this.shape = shape;
         this.color = color;
 
         setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
     }
 
-    public Size getSize() {
-        return size;
+    public Shape getSize() {
+        return shape;
     }
 
     public Color getColor() {
@@ -51,21 +47,37 @@ public class BeverageBlock extends HorizontalFacingBlock {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return Block.createCuboidShape(min.getX(), min.getY(), min.getZ(), max.getX(), max.getY(), max.getZ());
+        return Block.createCuboidShape(
+                this.shape.getMin().getX(), this.shape.getMin().getY(),this.shape.getMin().getZ(),
+                this.shape.getMax().getX(),this.shape.getMax().getY(),this.shape.getMax().getZ()
+        );
     }
 
-    public enum Size {
-        SMALL("small"),
-        LARGE("large");
+    public enum Shape {
+        SMALL("small", new Vec3i(5, 0, 5), new Vec3i(11, 8, 11)),
+        LARGE("large", new Vec3i(5, 0, 5), new Vec3i(11, 10, 11));
 
         private final String identifier;
+        private final Vec3i min;
+        private final Vec3i max;
 
-        Size(String identifier){
+        Shape(String identifier, Vec3i min, Vec3i max){
             this.identifier = identifier;
+            this.min = min;
+            this.max = max;
+
         }
 
         public String getName() {
             return identifier;
+        }
+
+        public Vec3i getMax() {
+            return max;
+        }
+
+        public Vec3i getMin() {
+            return min;
         }
     }
 

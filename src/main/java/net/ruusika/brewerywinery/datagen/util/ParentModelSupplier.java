@@ -5,12 +5,12 @@ import com.google.gson.JsonObject;
 import net.minecraft.data.client.SimpleModelSupplier;
 import net.minecraft.util.Identifier;
 
-public class BeerModelSupplier extends SimpleModelSupplier {
+public class ParentModelSupplier extends SimpleModelSupplier {
     private final Identifier parent;
     private final Identifier modelTexture;
     private final Identifier particleTexture;
 
-    public BeerModelSupplier(Identifier parent, Identifier modelTexture, Identifier particleTexture) {
+    public ParentModelSupplier(Identifier parent, Identifier modelTexture, Identifier particleTexture) {
         super(parent);
         this.parent = parent;
         this.modelTexture = modelTexture;

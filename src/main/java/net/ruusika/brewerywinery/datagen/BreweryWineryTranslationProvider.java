@@ -7,6 +7,7 @@ import net.minecraft.util.registry.Registry;
 import net.ruusika.brewerywinery.BreweryWinery;
 import net.ruusika.brewerywinery.blocks.BeverageBlock;
 import net.ruusika.brewerywinery.init.BreweryWineryBlocks;
+import net.ruusika.brewerywinery.init.BreweryWineryItems;
 
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -26,13 +27,19 @@ public class BreweryWineryTranslationProvider extends FabricLanguageProvider {
             translationBuilder.add(entry, cleanString(Registry.BLOCK.getId(entry), true));
        }
 
-        try {
-            Path existingFilePath = dataGenerator.getModContainer().findPath("assets/%s/lang/en_us_existing.json"
-                    .formatted(BreweryWinery.MOD_ID)).get();
-            translationBuilder.add(existingFilePath);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to add existing language file!", e);
-        }
+       translationBuilder.add(BreweryWineryBlocks.SERVING_TRAY, cleanString(Registry.BLOCK.getId(BreweryWineryBlocks.SERVING_TRAY), false));
+       translationBuilder.add(BreweryWineryBlocks.KEG_BLOCK, cleanString(Registry.BLOCK.getId(BreweryWineryBlocks.KEG_BLOCK), false));
+       translationBuilder.add(BreweryWineryItems.HOPS, cleanString(Registry.ITEM.getId(BreweryWineryItems.HOPS), false));
+       translationBuilder.add(BreweryWineryItems.YEAST, cleanString(Registry.ITEM.getId(BreweryWineryItems.YEAST), false));
+
+
+       try {
+           Path existingFilePath = dataGenerator.getModContainer().findPath("assets/%s/lang/en_us_existing.json"
+                   .formatted(BreweryWinery.MOD_ID)).get();
+           translationBuilder.add(existingFilePath);
+       } catch (Exception e) {
+           throw new RuntimeException("Failed to add existing language file!", e);
+       }
     }
 
     private static String cleanString(Identifier name, boolean reverse) {

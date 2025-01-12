@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 import net.ruusika.brewerywinery.BreweryWinery;
 import net.ruusika.brewerywinery.blocks.BeverageBlock;
 import net.ruusika.brewerywinery.blocks.KegBlock;
-import net.ruusika.brewerywinery.datagen.util.BeerModelSupplier;
+import net.ruusika.brewerywinery.datagen.util.ParentModelSupplier;
 import net.ruusika.brewerywinery.init.BreweryWineryBlocks;
 
 public class BreweryWineryModelProvider extends FabricModelProvider {
@@ -19,9 +19,6 @@ public class BreweryWineryModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator
-                .createSingletonBlockState(BreweryWineryBlocks.SERVING_TRAY,
-                        new Identifier(BreweryWinery.MOD_ID, "block/serving_tray_block")));
 
         generateDefaultNorthFacingBlock(blockStateModelGenerator, BreweryWineryBlocks.LAGER_BEER, "beer_lager_block");
         generateDefaultNorthFacingBlock(blockStateModelGenerator, BreweryWineryBlocks.CRAFT_BEER, "beer_craft_block");
@@ -42,22 +39,37 @@ public class BreweryWineryModelProvider extends FabricModelProvider {
                 .coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates())
                 .coordinate(createIsFinishedMap()));
 
+        blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator
+                .createSingletonBlockState(BreweryWineryBlocks.SERVING_TRAY,
+                        new Identifier(BreweryWinery.MOD_ID, "block/serving_tray_block")));
+
+
         for (BeverageBlock entry : BreweryWineryBlocks.BEERS) {
+
             String parentPath = "block/mug_" + entry.getSize().getName() + "_block";
             String texturePath = "block/mug_" + entry.getSize().getName() + "_" + entry.getColor().getName();
-            blockStateModelGenerator.excludeFromSimpleItemModelGeneration(entry);
-            blockStateModelGenerator.modelCollector.accept(ModelIds.getItemModelId(entry.asItem()),
-                    new BeerModelSupplier(
-                            new Identifier(BreweryWinery.MOD_ID, parentPath),
-                            new Identifier(BreweryWinery.MOD_ID, texturePath),
-                            new Identifier("block/glass")
-                    ));
+            generateCustomItemModel(blockStateModelGenerator, entry, parentPath, texturePath, "block/glass");
         }
+
+        generateCustomItemModel(blockStateModelGenerator, BreweryWineryBlocks.SERVING_TRAY,
+                "block/serving_tray_block",
+                "block/serving_tray_block",
+                "block/stripped_spruce_log");
     }
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
 
+    }
+
+    private static void generateCustomItemModel(BlockStateModelGenerator generator, Block block, String parentPath, String texturePath, String particlePath) {
+        generator.excludeFromSimpleItemModelGeneration(block);
+        generator.modelCollector.accept(ModelIds.getItemModelId(block.asItem()),
+                new ParentModelSupplier(
+                        new Identifier(BreweryWinery.MOD_ID, parentPath),
+                        new Identifier(BreweryWinery.MOD_ID, texturePath),
+                        new Identifier(particlePath)
+                ));
     }
 
     private static void generateDefaultNorthFacingBlock(BlockStateModelGenerator blockStateModelGenerator, Block block, String name) {
