@@ -1,15 +1,18 @@
 package net.ruusika.brewerywinery.init;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.ruusika.brewerywinery.BreweryWinery;
 import net.ruusika.brewerywinery.blocks.BeverageBlock;
+import net.ruusika.brewerywinery.blocks.HopsBlock;
 import net.ruusika.brewerywinery.blocks.KegBlock;
 import net.ruusika.brewerywinery.blocks.ServingTrayBlock;
 
@@ -72,6 +75,10 @@ public class BreweryWineryBlocks {
     public static final BeverageBlock MEAD = register("mead",
             new BeverageBlock(AbstractBlock.Settings.of(Material.GLASS, MapColor.BROWN).breakInstantly(),
                     BeverageBlock.Shape.SMALL, BeverageBlock.Color.HONEY), false);
+
+    public static final HopsBlock HOPS_PLANT = register("hops_plant",
+            new HopsBlock(FabricBlockSettings.of(Material.PLANT).nonOpaque().noCollision().ticksRandomly()
+                    .breakInstantly().sounds(BlockSoundGroup.CROP)), false);
 
     private static <T extends Block> T register(String name, T block, boolean hasDefaultItem) {
         Identifier id = new Identifier(BreweryWinery.MOD_ID, name);
