@@ -7,6 +7,7 @@ import net.minecraft.util.registry.Registry;
 import net.ruusika.brewerywinery.BreweryWinery;
 import net.ruusika.brewerywinery.blocks.BeverageBlock;
 import net.ruusika.brewerywinery.init.BreweryWineryBlocks;
+import net.ruusika.brewerywinery.init.BreweryWineryItemGroups;
 import net.ruusika.brewerywinery.init.BreweryWineryItems;
 
 import java.nio.file.Path;
@@ -21,22 +22,23 @@ public class BreweryWineryTranslationProvider extends FabricLanguageProvider {
     }
 
     @Override
-    public void generateTranslations(TranslationBuilder translationBuilder) {
+    public void generateTranslations(TranslationBuilder builder) {
 
        for (BeverageBlock entry : BreweryWineryBlocks.BEERS) {
-            translationBuilder.add(entry, cleanString(Registry.BLOCK.getId(entry), true));
+            builder.add(entry, cleanString(Registry.BLOCK.getId(entry), true));
        }
 
-       translationBuilder.add(BreweryWineryBlocks.SERVING_TRAY, cleanString(Registry.BLOCK.getId(BreweryWineryBlocks.SERVING_TRAY), false));
-       translationBuilder.add(BreweryWineryBlocks.KEG_BLOCK, cleanString(Registry.BLOCK.getId(BreweryWineryBlocks.KEG_BLOCK), false));
-       translationBuilder.add(BreweryWineryItems.HOPS, cleanString(Registry.ITEM.getId(BreweryWineryItems.HOPS), false));
-       translationBuilder.add(BreweryWineryItems.YEAST, cleanString(Registry.ITEM.getId(BreweryWineryItems.YEAST), false));
-
+       builder.add(BreweryWineryBlocks.SERVING_TRAY, cleanString(Registry.BLOCK.getId(BreweryWineryBlocks.SERVING_TRAY), false));
+       builder.add(BreweryWineryBlocks.KEG_BLOCK, cleanString(Registry.BLOCK.getId(BreweryWineryBlocks.KEG_BLOCK), false));
+       builder.add(BreweryWineryItems.HOPS, cleanString(Registry.ITEM.getId(BreweryWineryItems.HOPS), false));
+       builder.add(BreweryWineryItems.YEAST, cleanString(Registry.ITEM.getId(BreweryWineryItems.YEAST), false));
+       builder.add(BreweryWineryItemGroups.BREWERY_WINERY, "Brewery & Winery");
+       builder.add(BreweryWineryItems.BROKEN_BOTTLE, cleanString(Registry.ITEM.getId(BreweryWineryItems.BROKEN_BOTTLE), false));
 
        try {
            Path existingFilePath = dataGenerator.getModContainer().findPath("assets/%s/lang/en_us_existing.json"
                    .formatted(BreweryWinery.MOD_ID)).get();
-           translationBuilder.add(existingFilePath);
+           builder.add(existingFilePath);
        } catch (Exception e) {
            throw new RuntimeException("Failed to add existing language file!", e);
        }

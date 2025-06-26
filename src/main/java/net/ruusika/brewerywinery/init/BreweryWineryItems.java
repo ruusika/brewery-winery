@@ -6,6 +6,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.ruusika.brewerywinery.BreweryWinery;
 import net.ruusika.brewerywinery.items.BeverageItem;
+import net.ruusika.brewerywinery.items.BreweryWineryToolMaterials;
+import net.ruusika.brewerywinery.items.BrokenBottleItem;
 import net.ruusika.brewerywinery.items.ServingTrayItem;
 
 @SuppressWarnings("unused")
@@ -63,6 +65,10 @@ public class BreweryWineryItems {
     public static final ServingTrayItem SERVING_TRAY = register("serving_tray",
             new ServingTrayItem(BreweryWineryBlocks.SERVING_TRAY,
                     new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY)));
+
+    public static final BrokenBottleItem BROKEN_BOTTLE = register("broken_bottle",
+            new BrokenBottleItem(BreweryWineryToolMaterials.BROKEN_GLASS, 3, -2.0F,
+                    new Item.Settings().maxCount(1).group(BreweryWineryItemGroups.BREWERY_WINERY)));
 
     private static <T extends Item> T register(String name, T item) {
         return Registry.register(Registry.ITEM, new Identifier(BreweryWinery.MOD_ID, name), item);
