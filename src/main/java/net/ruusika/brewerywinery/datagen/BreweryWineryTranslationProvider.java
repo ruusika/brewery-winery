@@ -31,13 +31,14 @@ public class BreweryWineryTranslationProvider extends FabricLanguageProvider {
        builder.add(BreweryWineryBlocks.SERVING_TRAY, cleanString(Registry.BLOCK.getId(BreweryWineryBlocks.SERVING_TRAY), false));
        builder.add(BreweryWineryBlocks.KEG_BLOCK, cleanString(Registry.BLOCK.getId(BreweryWineryBlocks.KEG_BLOCK), false));
        builder.add(BreweryWineryItems.HOPS, cleanString(Registry.ITEM.getId(BreweryWineryItems.HOPS), false));
+       builder.add(BreweryWineryBlocks.HOPS_PLANT, cleanString(Registry.BLOCK.getId(BreweryWineryBlocks.HOPS_PLANT), false));
        builder.add(BreweryWineryItems.YEAST, cleanString(Registry.ITEM.getId(BreweryWineryItems.YEAST), false));
        builder.add(BreweryWineryItemGroups.BREWERY_WINERY, "Brewery & Winery");
        builder.add(BreweryWineryItems.BROKEN_BOTTLE, cleanString(Registry.ITEM.getId(BreweryWineryItems.BROKEN_BOTTLE), false));
 
        try {
            Path existingFilePath = dataGenerator.getModContainer().findPath("assets/%s/lang/en_us_existing.json"
-                   .formatted(BreweryWinery.MOD_ID)).get();
+                   .formatted(BreweryWinery.MOD_ID)).orElseThrow();
            builder.add(existingFilePath);
        } catch (Exception e) {
            throw new RuntimeException("Failed to add existing language file!", e);
