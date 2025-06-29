@@ -1,6 +1,7 @@
 package net.ruusika.brewerywinery.init;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -57,7 +58,7 @@ public class BreweryWineryItems {
             40));
     */
 
-    public static final Item HOPS = register("hops", new Item(
+    public static final Item HOPS = register("hops", new AliasedBlockItem(BreweryWineryBlocks.HOPS_PLANT,
             new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY)));
     public static final Item YEAST = register("yeast", new Item(
             new FabricItemSettings().group(BreweryWineryItemGroups.BREWERY_WINERY)));

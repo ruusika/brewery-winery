@@ -6,15 +6,63 @@
       "bonus_rolls": 0.0,
       "entries": [
         {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "brewery-winery:hops_plant",
+                  "properties": {
+                    "has_plant": "true"
+                  }
+                }
+              ],
+              "name": "brewery-winery:hops"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "brewery-winery:hops"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:apply_bonus",
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:binomial_with_bonus_count",
+              "parameters": {
+                "extra": 3,
+                "probability": 0.5714286
+              }
+            }
+          ],
           "name": "brewery-winery:hops"
         }
       ],
       "conditions": [
         {
-          "condition": "minecraft:survives_explosion"
+          "condition": "minecraft:block_state_property",
+          "block": "brewery-winery:hops_plant",
+          "properties": {
+            "has_plant": "true"
+          }
         }
       ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:explosion_decay"
     }
   ]
 }
