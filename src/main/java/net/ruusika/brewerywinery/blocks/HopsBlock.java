@@ -20,8 +20,6 @@ import net.ruusika.brewerywinery.init.BreweryWineryProperties;
 import net.ruusika.brewerywinery.util.BreweryWineryTags;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class HopsBlock extends CropBlock {
@@ -140,8 +138,48 @@ public class HopsBlock extends CropBlock {
         return newState;
     }
 
+    /**
+     * Counts Hops Block structure height. This doesn't account for if the block actually has a plant growing on it.
+     * So it checks, if the block has the BlockState of {@link BreweryWineryProperties#HAS_PLANT} but not what actual
+     * boolean value it has
+     *
+     * @param skipSelf skip the input BlockPos, for example if this block doesn't exist anymore but the size of
+     *                 the structure still needs to be calculated. It is still included in the count
+     * @return amount of Hops blocks in the structure
+     */
+    public static int getStructureHeight(WorldAccess world, BlockPos pos, boolean skipSelf, boolean countDown, boolean countUp) {
+        int count = 0;
+        BlockPos.Mutable posWalker = pos.mutableCopy();
+        if (skipSelf) {
+            posWalker.move(Direction.UP);
+            count++;
+        }
+        if (countUp) {
+            while (world.getBlockState(posWalker.toImmutable()).contains(BreweryWineryProperties.HAS_PLANT)) {
+                count++;
+                posWalker.move(Direction.UP);
+            }
+        }
+        if (countDown) {
+            posWalker.set(pos.down());
+            while (world.getBlockState(posWalker.toImmutable()).contains(BreweryWineryProperties.HAS_PLANT)) {
+                count++;
+                posWalker.move(Direction.DOWN);
+            }
+        }
+        return count;
+    }
+
     private static boolean isSupport(World world, BlockPos pos) {
         return world.getBlockState(pos).isIn(BreweryWineryTags.Blocks.HOPS_PILLAR);
+    }
+
+    private static boolean hasSupportAbove(WorldAccess world, BlockPos pos) {
+        BlockPos.Mutable posWalker = pos.up().mutableCopy();
+        while (world.getBlockState(posWalker.toImmutable()).contains(BreweryWineryProperties.HAS_PLANT)) {
+            posWalker.move(Direction.UP);
+        }
+        return isSupport(world, posWalker.toImmutable());
     }
 
     private static boolean isAir(World world, BlockPos pos) {
